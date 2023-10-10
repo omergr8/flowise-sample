@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
-import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import { formatDate, formatTime, getDaySuffix } from "../../../../utils/helper";
 
 import clsx from "clsx";
 import Banner from "../../../../components/Banner/Banner";
@@ -34,8 +34,8 @@ const getStoredResponses = () => {
 
         if (cursor) {
           // Retrieve both response and interest from the stored data
-          const { response, interest, date } = cursor.value;
-          storedData.push({ response, interest, date });
+          const { response, interest, date, home } = cursor.value;
+          storedData.push({ response, interest, date, home });
           cursor.continue();
         } else {
           resolve(storedData);
@@ -122,7 +122,7 @@ export default function Notices() {
                   expanded={expanded}
                   panel={`panel${i}`}
                 >
-                  <Typography>{el.date}</Typography>
+                  <Typography>{el.home} - {formatDate(el.date)} - {formatTime(el.date)}</Typography>
                 </AccordionSummary>
                 <AccordionDetails className={classes.details}>
                   {el.response.map((entry, index) => {

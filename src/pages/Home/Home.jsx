@@ -145,6 +145,7 @@ export default function FullWidthTabs() {
         objectStore.add({
           response: entries,
           interest: interest,
+          home: home,
           date: getCurrentDate(),
         });
         setIsLoading(false);
